@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');  // Middleware for parsing incoming r
   // MongoDB ODM (Object Data Modeling) for working with MongoDB
 const cors = require('cors');  // Middleware to enable Cross-Origin Resource Sharing (CORS)
 const studentRoutes = require('./studentRoutes');  // Import student-related routes from a separate module
-
+const dotenv=require("dotenv");
 // Initialize Express app
 const app = express();  
-const PORT = 5000;  // Set the port where the server will listen
+dotenv.config({path:'./.env'})
+const PORT = process.env.PORT;  // Set the port where the server will listen
 
 // Middleware setup
 app.use(cors());  // Enable CORS for all routes to allow cross-origin requests (important for frontend-backend communication)
@@ -16,7 +17,7 @@ app.use(bodyParser.json());  // Use body-parser middleware to parse JSON data in
 // Connect to MongoDB database using Mongoose
 const mongoose = require('mongoose');
 
-const uri = 'mongodb+srv://chinnu6749:Manideep2005@cluster0.depwb.mongodb.net/it';
+const uri = process.env.MONGO_URI;
  // Enable debug logs
 
 mongoose.connect(uri)
